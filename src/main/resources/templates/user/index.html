@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base(title=${systemName})">
+    <base th:href="${index}"/>
+
+</head>
+<body>
+
+<div id="user_list">
+
+    <table class="layui-table">
+        <colgroup>
+            <col>
+            <col>
+            <col width="300">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>昵称</th>
+            <th>姓名</th>
+            <th>邮箱</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user:${users}">
+            <td th:text="${user.userName}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <a tooltip data-title="修改" onclick="return openDialog(this)" data-area="1200,800" dialog-title="修改群组数据" th:href="@{/user/update/} + ${user.id}">更新</a>
+                <a tooltip data-title="删除" onclick="return deleteConfirm(this)" data-confirm="确定删除?" th:href="@{/user/delete/} + ${user.id}">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

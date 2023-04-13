@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <form id="userUpdate" th:fragment="userForm(link)" method="post" class="layui-form" th:action="${link}">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block col-2">
+                <input type="text" name="userName" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                <input  name="11" type="submit" value="ads"/>
+            </div>
+
+        </div>
+    </form>
+
+</body>
+
+
+<script type="text/javascript">
+
+</script>
+</html>

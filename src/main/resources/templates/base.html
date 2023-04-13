@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head  th:fragment="base(title)">
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" th:href="'/'+@{../static/layui/css/layui.css}"  media="all">
+    <script type="text/javascript" th:src="'/'+@{../static/login.js}"></script>
+    <script type="text/javascript" th:src="'/'+@{../static/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="'/'+@{../static/layer/layer.js}"></script>
+    <script type="text/javascript" th:src="'/'+@{../static/js/main.js}"></script>
+    <script type="text/javascript" th:src="'/'+@{../static/jquery-ui.min.js}"></script>
+</head>
+<body>
+
+</body>
+</html>

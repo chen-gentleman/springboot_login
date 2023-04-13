@@ -1,0 +1,69 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: springboot-login
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.0.56:3306/sboot_login
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      username: root
+      password: EPn5ZQje79IBV2iOyXK3RmdDG1gQi61eK8J0fblfdMAlVrrHDT8qWijgBYVLiidTCvv2W0I72JBBUeVvNuB6ZA==
+      # encrypt config
+      filters: config
+      connect-properties:
+        config.decrypt: true
+        config.decrypt.key: ${spring.datasource.druid.publicKey}
+      initialSize: 10
+      maxActive: 20
+      maxWait: 60000
+      minIdle: 1
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: chen
+        login-password: chen
+        filter:
+          stat:
+            merge-sql: true
+            slow-sql-millis: 3000
+            log-slow-sql: true
+  redis:
+    host: 47.107.107.41
+    password: chen20210712
+    lettuce:
+      pool:
+        max-active: 8
+  mvc:
+    static-path-pattern: /static/**
+
+  thymeleaf:
+    cache: false
+  mail:
+    host: smtp.qq.com
+    password: knsiuupxobfudjfd
+    username: 2412067642@qq.com
+    port: 465
+    protocol: smtps
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          timeout: 3000
+system:
+  name: 陈杏昌
+  loginPage: login_2.html
+  index: /
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  type-aliases-package: com.chen.bean
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

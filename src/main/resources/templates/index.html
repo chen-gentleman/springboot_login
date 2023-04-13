@@ -1,0 +1,257 @@
+<head th:replace="base(title=${systemName})" xmlns:th="http://www.w3.org/1999/xhtml">
+    <base th:href="${index}"/>
+</head>
+
+<style>
+    iframe{
+        width: 100%;
+        height: 100%;
+    }
+    .layui-body{overflow: visible;}
+    #page-caozuo{
+        height: 40px;
+        width: 100%;
+    }
+    #menu .layui-nav .layui-nav-item a{
+        padding: 0 20px 0 10px;
+    }
+</style>
+
+
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" onclick="back()"><font color="white" size="5"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 会议管理</font></div>
+    </div>
+
+    <div id="menu" class="layui-side layui-bg-black">
+    </div>
+
+    <div class="layui-body">
+        <!--<div id="page-caozuo">
+
+        </div>-->
+        <!-- 内容主体区域 -->
+        <iframe src="/user/findAll" frameborder="0"></iframe>
+        <!--<div style="padding: 15px;">
+            <table class="layui-hide layui-col-md12" id="test"></table>
+        </div>-->
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 - 底部固定区域 -->
+        © chen.com
+    </div>
+</div>
+
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+<script>
+    // 导航菜单的间隔像素
+    var menuCell = 2;
+    //这里就不在后台生成了，直接手写
+    layui.use('element', function(){
+        var element = layui.element;
+        var $ = layui.jquery;
+
+        data= [
+            {
+                "name": "用户列表",
+                "url": "/user/findAll",
+                "icon": "layui-icon-home",
+                "childMenus": null
+            },
+            {
+                "name": "会议座位图",
+                "url": "meets/meetSeat/#(meetId)",
+                "icon": "layui-icon-picture-fine",
+                "childMenus": null
+            },
+            {
+                "name": "参会人员",
+                "url": "meets/atendeesOnSetting/#(meetId)",
+                "icon": "layui-icon-user",
+                "childMenus": null
+                /* "childMenus": [
+                    {
+                        "name": "参会人员",
+                        "url": "meets/atendeesOnSetting/#(meetId)",
+                        "icon": "layui-icon-username",
+                        "childMenus": null
+                    },
+                     {
+                        "name": "页面2",
+                        "url": "https://www.layui.com/admin/std/dist/views/home/homepage2.html",
+                        "icon": "layui-icon-snowflake",
+                        "childMenus": null
+                    }
+                ]*/
+            },
+            {
+                "name": "会议议题",
+                "url": "meets/themeOnSetting/#(meetId)",
+                "icon": "layui-icon-list",
+                "childMenus": null
+                /*  "childMenus": [
+                    {
+                        "name": "会议议题",
+                        "url": "meets/themeOnSetting/#(meetId)",
+                        "icon": "layui-icon-list",
+                        "childMenus": null
+                    },
+                ]*/
+            },
+
+            {
+                "name": "签到结果",
+                "url": "meets/signResult/#(meetId)",
+                "icon": "layui-icon-ok-circle",
+                "childMenus":null
+                /*    "childMenus": [
+                    {
+                        "name": "签到结果",
+                        "url": "https://www.layui.com/admin/std/dist/views/home/homepage2.html",
+                        "icon": "layui-icon-user",
+                        "childMenus": null
+                    },
+                ]*/
+            },
+
+
+
+
+
+            {
+                "name": "会后总结",
+                "url": "meets/meetSummary/#(meetId)",
+                "icon": "layui-icon-star",
+                "childMenus":null
+                /*    "childMenus": [
+                    {
+                        "name": "签到结果",
+                        "url": "https://www.layui.com/admin/std/dist/views/home/homepage2.html",
+                        "icon": "layui-icon-user",
+                        "childMenus": null
+                    },
+                ]*/
+            },
+        ];
+        //console.log("data: "+data);
+//      data = JSON.parse(data);
+        var liStr= "";
+        // 遍历生成主菜单
+        for( var i = 0; i <data.length; i++){
+            //console.log("--> "+JSON.stringify(data[i]));
+            // 判断是否存在子菜单
+            if(data[i].childMenus!=null&&data[i].childMenus.length>0){
+                console.log("--> "+JSON.stringify(data[i].childMenus));
+                liStr+="<li class=\"layui-nav-item\"><a class=\"\" href=\"javascript:;\"><i class='layui-icon "+ data[i].icon +"'></i> "+data[i].name+"</a>\n"+
+                    "<dl class=\"layui-nav-child\">\n";
+                // 遍历获取子菜单
+                for( var k = 0; k <data[i].childMenus.length; k++){
+                    liStr+=getChildMenu(data[i].childMenus[k],0);
+                }
+                liStr+="</dl></li>";
+            }else{
+                liStr+="<li class=\"layui-nav-item\"><a class=\"\" href=\"javascript:;\" data-url=\""+data[i].url+"\"><i class='layui-icon "+ data[i].icon +"'></i> "+data[i].name+"</a></li>";
+            }
+        };
+        //console.log(">>>> "+liStr);
+        $("#menu").html("<ul class=\"layui-nav layui-nav-tree\"  lay-filter=\"test\">\n" +liStr+"</ul>");
+        element.init();
+
+        // 页面切换
+        $(document).on('click', '#menu a', function(){
+            var thisPage = $(this).attr("data-url");
+            if(typeof(thisPage) != "undefined"){
+                if($('.layui-body iframe').attr('src') == thisPage)return;
+                $('.layui-body iframe').attr('src', thisPage)
+            }
+        });
+    });
+
+    // 递归生成子菜单
+    function getChildMenu(subMenu,num) {
+        console.log("num: "+num);
+        num++;
+        var subStr = "";
+        if(subMenu.childMenus!=null&&subMenu.childMenus.length>0){
+            subStr+="<dd><ul><li class=\"layui-nav-item\" ><a style=\"text-indent: "+num*menuCell+"em\" class=\"\" href=\"javascript:;\"><i class='layui-icon "+ subMenu.icon +"'></i> "+subMenu.name+"</a>" +
+                "<dl class=\"layui-nav-child\">\n";
+            for( var j = 0; j <subMenu.childMenus.length; j++){
+                subStr+=getChildMenu(subMenu.childMenus[j],num);
+            }
+            subStr+="</dl></li></ul></dd>";
+        }else{
+            subStr+="<dd><a style=\"text-indent:"+num*menuCell+"em\" href=\"javascript:;\" data-url=\""+subMenu.url+"\"><i class='layui-icon "+ subMenu.icon +"'></i> "+subMenu.name+"</a></dd>";
+        }
+        return subStr;
+    }
+
+    function back(){
+        location.href=document.referrer;
+    };
+</script>
+
+<!-- 20230215
+		    
+		    {
+		        "name": "会议投票",
+		        "url": "themeVote/index3/#(meetId)",
+		        "icon": "layui-icon-layer",
+		        "childMenus":null
+		        /*    "childMenus": [
+		        	{
+		                "name": "签到结果",
+		                "url": "https://www.layui.com/admin/std/dist/views/home/homepage2.html",
+		                "icon": "layui-icon-user",
+		                "childMenus": null
+		            },
+		        ]*/
+		    },
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#end
+

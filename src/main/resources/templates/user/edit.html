@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base(title=${systemName})">
+    <base th:href="${index}"/>
+</head>
+<body>
+<form th:id="userUpdate" class="layui-form" th:action="${link}">
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input hidden name="id" th:value="${user.id}">
+            <input type="text" name="userName" th:value="${user.userName}" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+        </div>
+
+
+
+        <label class="layui-form-label"></label>
+        <div class="layui-input-block">
+            <button onclick="s()">确定</button>
+        </div>
+
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    function s() {
+    console.log($(".layui-form").serialize());
+    var url = '/user/update';
+    $.ajax({
+        cache: false,
+        type: "POST",
+        url: url,
+        data: $(".layui-form").serialize(),  //序列化表单数据
+        async: true,                 //是否是异步，默认为异步
+        success: function(data) {
+            if (data.msg == "ok") {
+                LayerMsgBox.success(data.msg,1500,function(){
+                    location.reload();
+                    parent.layer.closeAll();
+                });
+                return false;
+            } else {
+                LayerMsgBox.error(data.msg);
+                return false;
+            }
+        }
+    });
+}
+
+
+</script>
+
+</body>
+</html>
