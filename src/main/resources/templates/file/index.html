@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base(title=${systemName})">
+    <base th:href="${index}"/>
+
+</head>
+<body>
+
+<div id="file_list">
+    <a class="layui-btn" style="float: right" tooltip data-title="上传文件" onclick="return openDialog(this)" data-area="1200,800" dialog-title="上传文件" th:href="@{/file/upload/}">上传</a>
+
+    <table class="layui-table">
+        <colgroup>
+            <col>
+            <col>
+            <col width="300">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>文件名</th>
+            <th>大小</th>
+            <th>上传时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="file:${files}">
+            <td th:text="${file.id}"></td>
+            <td>
+                <a onclick="return openDialog(this)" th:text="${file.name}" data-area="1200,800" th:dialog-title="${file.name}" th:href="@{/file/checkFileOnline/} + ${file.id}"></a>
+            </td>
+            <td th:text="${file.fileSize}"></td>
+            <td th:text="${file.createTime}"></td>
+            <td>
+                <a tooltip data-title="修改" onclick="return openDialog(this)" data-area="1200,800" dialog-title="修改群组数据" th:href="@{/file/update/} + ${file.id}">更新</a>
+                <a tooltip data-title="删除" onclick="return deleteConfirm(this)" data-confirm="确定删除?" th:href="@{/file/delete/} + ${file.id}">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

@@ -41,6 +41,10 @@ spring:
         max-active: 8
   mvc:
     static-path-pattern: /static/**
+  servlet:
+    multipart:
+      max-file-size: 100000000
+      max-request-size: 100000000
 
   thymeleaf:
     cache: false

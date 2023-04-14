@@ -1,5 +1,7 @@
 package com.chen.bean;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
@@ -9,7 +11,9 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@TableName("sb_user")
 public class User {
+    @TableId
     private Integer id;
     private String userName;
     private String name;

@@ -32,6 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new RefreshTokenInterceptor(redisTemplate)).addPathPatterns("/**").excludePathPatterns("/admin/login","/admin/register","/admin/captcha","/static/**");
         registry.addInterceptor(new IndexInterceptor()).addPathPatterns("/admin/**").excludePathPatterns("/admin/login","/admin/register","/admin/captcha","/static/**");
         registry.addInterceptor(new UserInterceptor()).addPathPatterns("/user/**");
+        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/file/**");
        }
 
     @Bean

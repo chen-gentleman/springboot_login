@@ -17,8 +17,6 @@
     }
 </style>
 
-
-
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo" onclick="back()"><font color="white" size="5"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 会议管理</font></div>
@@ -28,19 +26,12 @@
     </div>
 
     <div class="layui-body">
-        <!--<div id="page-caozuo">
-
-        </div>-->
-        <!-- 内容主体区域 -->
         <iframe src="/user/findAll" frameborder="0"></iframe>
-        <!--<div style="padding: 15px;">
-            <table class="layui-hide layui-col-md12" id="test"></table>
-        </div>-->
     </div>
 
     <div class="layui-footer">
         <!-- 底部固定区域 - 底部固定区域 -->
-        © chen.com
+        © Chenxc.com
     </div>
 </div>
 
@@ -57,84 +48,16 @@
 
         data= [
             {
-                "name": "用户列表",
+                "name": "用户管理",
                 "url": "/user/findAll",
                 "icon": "layui-icon-home",
                 "childMenus": null
             },
             {
-                "name": "会议座位图",
-                "url": "meets/meetSeat/#(meetId)",
+                "name": "文件管理",
+                "url": "/file/findAll",
                 "icon": "layui-icon-picture-fine",
                 "childMenus": null
-            },
-            {
-                "name": "参会人员",
-                "url": "meets/atendeesOnSetting/#(meetId)",
-                "icon": "layui-icon-user",
-                "childMenus": null
-                /* "childMenus": [
-                    {
-                        "name": "参会人员",
-                        "url": "meets/atendeesOnSetting/#(meetId)",
-                        "icon": "layui-icon-username",
-                        "childMenus": null
-                    },
-                     {
-                        "name": "页面2",
-                        "url": "https://www.layui.com/admin/std/dist/views/home/homepage2.html",
-                        "icon": "layui-icon-snowflake",
-                        "childMenus": null
-                    }
-                ]*/
-            },
-            {
-                "name": "会议议题",
-                "url": "meets/themeOnSetting/#(meetId)",
-                "icon": "layui-icon-list",
-                "childMenus": null
-                /*  "childMenus": [
-                    {
-                        "name": "会议议题",
-                        "url": "meets/themeOnSetting/#(meetId)",
-                        "icon": "layui-icon-list",
-                        "childMenus": null
-                    },
-                ]*/
-            },
-
-            {
-                "name": "签到结果",
-                "url": "meets/signResult/#(meetId)",
-                "icon": "layui-icon-ok-circle",
-                "childMenus":null
-                /*    "childMenus": [
-                    {
-                        "name": "签到结果",
-                        "url": "https://www.layui.com/admin/std/dist/views/home/homepage2.html",
-                        "icon": "layui-icon-user",
-                        "childMenus": null
-                    },
-                ]*/
-            },
-
-
-
-
-
-            {
-                "name": "会后总结",
-                "url": "meets/meetSummary/#(meetId)",
-                "icon": "layui-icon-star",
-                "childMenus":null
-                /*    "childMenus": [
-                    {
-                        "name": "签到结果",
-                        "url": "https://www.layui.com/admin/std/dist/views/home/homepage2.html",
-                        "icon": "layui-icon-user",
-                        "childMenus": null
-                    },
-                ]*/
             },
         ];
         //console.log("data: "+data);
@@ -194,22 +117,36 @@
     };
 </script>
 
-<!-- 20230215
-		    
-		    {
-		        "name": "会议投票",
-		        "url": "themeVote/index3/#(meetId)",
-		        "icon": "layui-icon-layer",
-		        "childMenus":null
-		        /*    "childMenus": [
-		        	{
-		                "name": "签到结果",
-		                "url": "https://www.layui.com/admin/std/dist/views/home/homepage2.html",
-		                "icon": "layui-icon-user",
-		                "childMenus": null
-		            },
-		        ]*/
-		    },
+<!--
+
+            {
+                "name": "参会人员",
+                "url": "meets/atendeesOnSetting/#(meetId)",
+                "icon": "layui-icon-user",
+                "childMenus": null,
+                "childMenus": [
+                    {
+                        "name": "参会人员",
+                        "url": "meets/atendeesOnSetting/#(meetId)",
+                        "icon": "layui-icon-username",
+                        "childMenus": null
+                    },
+                     {
+                        "name": "页面2",
+                        "url": "https://www.layui.com/admin/std/dist/views/home/homepage2.html",
+                        "icon": "layui-icon-snowflake",
+                        "childMenus": null
+                    }
+                ]
+            },
+
+
+
+
+
+
+
+
 
 -->
 
